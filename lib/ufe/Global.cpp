@@ -30,6 +30,7 @@
 // Note: must come after include of ufe files so we have the define.
 #include "UsdAttributesHandler.h"
 #include "UsdObject3dHandler.h"
+#include <ufe/pathString.h>
 #else
 #include "UfeVersionCompat.h"
 #endif
@@ -109,6 +110,9 @@ MStatus initialize()
 		return MS::kFailure;
 
 	g_StagesSubject = StagesSubject::create();
+
+    // Register for UFE string to path service using path component separator '/'
+    UFE_V2(Ufe::PathString::registerPathComponentSeparator(g_USDRtid, '/');)
 
 	return MS::kSuccess;
 }
